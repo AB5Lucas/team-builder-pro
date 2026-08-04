@@ -13,7 +13,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
-import { Route as AuthenticatedColaboradoresRouteImport } from './routes/_authenticated/colaboradores'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedRelatoriosRouteImport } from './routes/_authenticated/relatorios'
 import { Route as AuthenticatedTreinamentosRouteImport } from './routes/_authenticated/treinamentos'
@@ -25,6 +24,8 @@ import { Route as AuthenticatedAusenciasFeriasRouteImport } from './routes/_auth
 import { Route as AuthenticatedAusenciasFolgasRouteImport } from './routes/_authenticated/ausencias.folgas'
 import { Route as AuthenticatedBeneficiosPremioViagemRouteImport } from './routes/_authenticated/beneficios.premio-viagem'
 import { Route as AuthenticatedBeneficiosValeTransporteRouteImport } from './routes/_authenticated/beneficios.vale-transporte'
+import { Route as AuthenticatedColaboradoresIndexRouteImport } from './routes/_authenticated/colaboradores.index'
+import { Route as AuthenticatedColaboradoresEstruturaRouteImport } from './routes/_authenticated/colaboradores.estrutura'
 import { Route as AuthenticatedObrasIndexRouteImport } from './routes/_authenticated/obras.index'
 import { Route as AuthenticatedObrasEquipesBaseRouteImport } from './routes/_authenticated/obras.equipes-base'
 import { Route as AuthenticatedObrasRequisitosRouteImport } from './routes/_authenticated/obras.requisitos'
@@ -55,12 +56,6 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedColaboradoresRoute =
-  AuthenticatedColaboradoresRouteImport.update({
-    id: '/colaboradores',
-    path: '/colaboradores',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -123,6 +118,18 @@ const AuthenticatedBeneficiosValeTransporteRoute =
   AuthenticatedBeneficiosValeTransporteRouteImport.update({
     id: '/beneficios/vale-transporte',
     path: '/beneficios/vale-transporte',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedColaboradoresIndexRoute =
+  AuthenticatedColaboradoresIndexRouteImport.update({
+    id: '/colaboradores/',
+    path: '/colaboradores/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedColaboradoresEstruturaRoute =
+  AuthenticatedColaboradoresEstruturaRouteImport.update({
+    id: '/colaboradores/estrutura',
+    path: '/colaboradores/estrutura',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedObrasIndexRoute = AuthenticatedObrasIndexRouteImport.update({
@@ -189,7 +196,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/colaboradores': typeof AuthenticatedColaboradoresRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/relatorios': typeof AuthenticatedRelatoriosRoute
   '/treinamentos': typeof AuthenticatedTreinamentosRoute
@@ -201,6 +207,7 @@ export interface FileRoutesByFullPath {
   '/ausencias/folgas': typeof AuthenticatedAusenciasFolgasRoute
   '/beneficios/premio-viagem': typeof AuthenticatedBeneficiosPremioViagemRoute
   '/beneficios/vale-transporte': typeof AuthenticatedBeneficiosValeTransporteRoute
+  '/colaboradores/estrutura': typeof AuthenticatedColaboradoresEstruturaRoute
   '/obras/equipes-base': typeof AuthenticatedObrasEquipesBaseRoute
   '/obras/requisitos': typeof AuthenticatedObrasRequisitosRoute
   '/programacao/diaria': typeof AuthenticatedProgramacaoDiariaRoute
@@ -209,6 +216,7 @@ export interface FileRoutesByFullPath {
   '/programacao/semanal': typeof AuthenticatedProgramacaoSemanalRoute
   '/veiculos/motoristas': typeof AuthenticatedVeiculosMotoristasRoute
   '/veiculos/transporte': typeof AuthenticatedVeiculosTransporteRoute
+  '/colaboradores/': typeof AuthenticatedColaboradoresIndexRoute
   '/obras/': typeof AuthenticatedObrasIndexRoute
   '/veiculos/': typeof AuthenticatedVeiculosIndexRoute
 }
@@ -216,7 +224,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/colaboradores': typeof AuthenticatedColaboradoresRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/relatorios': typeof AuthenticatedRelatoriosRoute
   '/treinamentos': typeof AuthenticatedTreinamentosRoute
@@ -228,6 +235,7 @@ export interface FileRoutesByTo {
   '/ausencias/folgas': typeof AuthenticatedAusenciasFolgasRoute
   '/beneficios/premio-viagem': typeof AuthenticatedBeneficiosPremioViagemRoute
   '/beneficios/vale-transporte': typeof AuthenticatedBeneficiosValeTransporteRoute
+  '/colaboradores/estrutura': typeof AuthenticatedColaboradoresEstruturaRoute
   '/obras/equipes-base': typeof AuthenticatedObrasEquipesBaseRoute
   '/obras/requisitos': typeof AuthenticatedObrasRequisitosRoute
   '/programacao/diaria': typeof AuthenticatedProgramacaoDiariaRoute
@@ -236,6 +244,7 @@ export interface FileRoutesByTo {
   '/programacao/semanal': typeof AuthenticatedProgramacaoSemanalRoute
   '/veiculos/motoristas': typeof AuthenticatedVeiculosMotoristasRoute
   '/veiculos/transporte': typeof AuthenticatedVeiculosTransporteRoute
+  '/colaboradores': typeof AuthenticatedColaboradoresIndexRoute
   '/obras': typeof AuthenticatedObrasIndexRoute
   '/veiculos': typeof AuthenticatedVeiculosIndexRoute
 }
@@ -245,7 +254,6 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/_authenticated/colaboradores': typeof AuthenticatedColaboradoresRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/relatorios': typeof AuthenticatedRelatoriosRoute
   '/_authenticated/treinamentos': typeof AuthenticatedTreinamentosRoute
@@ -257,6 +265,7 @@ export interface FileRoutesById {
   '/_authenticated/ausencias/folgas': typeof AuthenticatedAusenciasFolgasRoute
   '/_authenticated/beneficios/premio-viagem': typeof AuthenticatedBeneficiosPremioViagemRoute
   '/_authenticated/beneficios/vale-transporte': typeof AuthenticatedBeneficiosValeTransporteRoute
+  '/_authenticated/colaboradores/estrutura': typeof AuthenticatedColaboradoresEstruturaRoute
   '/_authenticated/obras/equipes-base': typeof AuthenticatedObrasEquipesBaseRoute
   '/_authenticated/obras/requisitos': typeof AuthenticatedObrasRequisitosRoute
   '/_authenticated/programacao/diaria': typeof AuthenticatedProgramacaoDiariaRoute
@@ -265,6 +274,7 @@ export interface FileRoutesById {
   '/_authenticated/programacao/semanal': typeof AuthenticatedProgramacaoSemanalRoute
   '/_authenticated/veiculos/motoristas': typeof AuthenticatedVeiculosMotoristasRoute
   '/_authenticated/veiculos/transporte': typeof AuthenticatedVeiculosTransporteRoute
+  '/_authenticated/colaboradores/': typeof AuthenticatedColaboradoresIndexRoute
   '/_authenticated/obras/': typeof AuthenticatedObrasIndexRoute
   '/_authenticated/veiculos/': typeof AuthenticatedVeiculosIndexRoute
 }
@@ -274,7 +284,6 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/reset-password'
-    | '/colaboradores'
     | '/dashboard'
     | '/relatorios'
     | '/treinamentos'
@@ -286,6 +295,7 @@ export interface FileRouteTypes {
     | '/ausencias/folgas'
     | '/beneficios/premio-viagem'
     | '/beneficios/vale-transporte'
+    | '/colaboradores/estrutura'
     | '/obras/equipes-base'
     | '/obras/requisitos'
     | '/programacao/diaria'
@@ -294,6 +304,7 @@ export interface FileRouteTypes {
     | '/programacao/semanal'
     | '/veiculos/motoristas'
     | '/veiculos/transporte'
+    | '/colaboradores/'
     | '/obras/'
     | '/veiculos/'
   fileRoutesByTo: FileRoutesByTo
@@ -301,7 +312,6 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/reset-password'
-    | '/colaboradores'
     | '/dashboard'
     | '/relatorios'
     | '/treinamentos'
@@ -313,6 +323,7 @@ export interface FileRouteTypes {
     | '/ausencias/folgas'
     | '/beneficios/premio-viagem'
     | '/beneficios/vale-transporte'
+    | '/colaboradores/estrutura'
     | '/obras/equipes-base'
     | '/obras/requisitos'
     | '/programacao/diaria'
@@ -321,6 +332,7 @@ export interface FileRouteTypes {
     | '/programacao/semanal'
     | '/veiculos/motoristas'
     | '/veiculos/transporte'
+    | '/colaboradores'
     | '/obras'
     | '/veiculos'
   id:
@@ -329,7 +341,6 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/reset-password'
-    | '/_authenticated/colaboradores'
     | '/_authenticated/dashboard'
     | '/_authenticated/relatorios'
     | '/_authenticated/treinamentos'
@@ -341,6 +352,7 @@ export interface FileRouteTypes {
     | '/_authenticated/ausencias/folgas'
     | '/_authenticated/beneficios/premio-viagem'
     | '/_authenticated/beneficios/vale-transporte'
+    | '/_authenticated/colaboradores/estrutura'
     | '/_authenticated/obras/equipes-base'
     | '/_authenticated/obras/requisitos'
     | '/_authenticated/programacao/diaria'
@@ -349,6 +361,7 @@ export interface FileRouteTypes {
     | '/_authenticated/programacao/semanal'
     | '/_authenticated/veiculos/motoristas'
     | '/_authenticated/veiculos/transporte'
+    | '/_authenticated/colaboradores/'
     | '/_authenticated/obras/'
     | '/_authenticated/veiculos/'
   fileRoutesById: FileRoutesById
@@ -389,13 +402,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/reset-password'
       preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/colaboradores': {
-      id: '/_authenticated/colaboradores'
-      path: '/colaboradores'
-      fullPath: '/colaboradores'
-      preLoaderRoute: typeof AuthenticatedColaboradoresRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
@@ -474,6 +480,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedBeneficiosValeTransporteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/colaboradores/': {
+      id: '/_authenticated/colaboradores/'
+      path: '/colaboradores'
+      fullPath: '/colaboradores/'
+      preLoaderRoute: typeof AuthenticatedColaboradoresIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/colaboradores/estrutura': {
+      id: '/_authenticated/colaboradores/estrutura'
+      path: '/colaboradores/estrutura'
+      fullPath: '/colaboradores/estrutura'
+      preLoaderRoute: typeof AuthenticatedColaboradoresEstruturaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/obras/': {
       id: '/_authenticated/obras/'
       path: '/obras'
@@ -548,7 +568,6 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedColaboradoresRoute: typeof AuthenticatedColaboradoresRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedRelatoriosRoute: typeof AuthenticatedRelatoriosRoute
   AuthenticatedTreinamentosRoute: typeof AuthenticatedTreinamentosRoute
@@ -560,6 +579,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAusenciasFolgasRoute: typeof AuthenticatedAusenciasFolgasRoute
   AuthenticatedBeneficiosPremioViagemRoute: typeof AuthenticatedBeneficiosPremioViagemRoute
   AuthenticatedBeneficiosValeTransporteRoute: typeof AuthenticatedBeneficiosValeTransporteRoute
+  AuthenticatedColaboradoresEstruturaRoute: typeof AuthenticatedColaboradoresEstruturaRoute
   AuthenticatedObrasEquipesBaseRoute: typeof AuthenticatedObrasEquipesBaseRoute
   AuthenticatedObrasRequisitosRoute: typeof AuthenticatedObrasRequisitosRoute
   AuthenticatedProgramacaoDiariaRoute: typeof AuthenticatedProgramacaoDiariaRoute
@@ -568,12 +588,12 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedProgramacaoSemanalRoute: typeof AuthenticatedProgramacaoSemanalRoute
   AuthenticatedVeiculosMotoristasRoute: typeof AuthenticatedVeiculosMotoristasRoute
   AuthenticatedVeiculosTransporteRoute: typeof AuthenticatedVeiculosTransporteRoute
+  AuthenticatedColaboradoresIndexRoute: typeof AuthenticatedColaboradoresIndexRoute
   AuthenticatedObrasIndexRoute: typeof AuthenticatedObrasIndexRoute
   AuthenticatedVeiculosIndexRoute: typeof AuthenticatedVeiculosIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedColaboradoresRoute: AuthenticatedColaboradoresRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedRelatoriosRoute: AuthenticatedRelatoriosRoute,
   AuthenticatedTreinamentosRoute: AuthenticatedTreinamentosRoute,
@@ -587,6 +607,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
     AuthenticatedBeneficiosPremioViagemRoute,
   AuthenticatedBeneficiosValeTransporteRoute:
     AuthenticatedBeneficiosValeTransporteRoute,
+  AuthenticatedColaboradoresEstruturaRoute:
+    AuthenticatedColaboradoresEstruturaRoute,
   AuthenticatedObrasEquipesBaseRoute: AuthenticatedObrasEquipesBaseRoute,
   AuthenticatedObrasRequisitosRoute: AuthenticatedObrasRequisitosRoute,
   AuthenticatedProgramacaoDiariaRoute: AuthenticatedProgramacaoDiariaRoute,
@@ -596,6 +618,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedProgramacaoSemanalRoute: AuthenticatedProgramacaoSemanalRoute,
   AuthenticatedVeiculosMotoristasRoute: AuthenticatedVeiculosMotoristasRoute,
   AuthenticatedVeiculosTransporteRoute: AuthenticatedVeiculosTransporteRoute,
+  AuthenticatedColaboradoresIndexRoute: AuthenticatedColaboradoresIndexRoute,
   AuthenticatedObrasIndexRoute: AuthenticatedObrasIndexRoute,
   AuthenticatedVeiculosIndexRoute: AuthenticatedVeiculosIndexRoute,
 }
