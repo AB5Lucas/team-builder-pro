@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader, ComingSoon } from "@/components/page-header";
 
-export const Route = createFileRoute("/_authenticated/obras")({
+export const Route = createFileRoute("/_authenticated/obras/")({
   head: () => ({
     meta: [
       { title: "Obras | Programação Operacional" },
