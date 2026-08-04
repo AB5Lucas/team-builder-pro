@@ -40,7 +40,14 @@ const groups: Group[] = [
       { title: "Histórico", url: "/programacao/historico" },
     ],
   },
-  { label: "Colaboradores", icon: Users, items: [{ title: "Colaboradores", url: "/colaboradores" }] },
+  {
+    label: "Colaboradores",
+    icon: Users,
+    items: [
+      { title: "Colaboradores", url: "/colaboradores" },
+      { title: "Cargos e Setores", url: "/colaboradores/estrutura" },
+    ],
+  },
   {
     label: "Obras",
     icon: Building2,
