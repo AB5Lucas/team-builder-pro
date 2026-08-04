@@ -41,11 +41,17 @@ function AuthPage() {
   async function handleSignIn(e: React.FormEvent) {
     e.preventDefault();
     const parsed = z.object({ email: emailSchema, password: passwordSchema }).safeParse({ email, password });
-    if (!parsed.success) return toast.error(parsed.error.issues[0]!.message);
+    if (!parsed.success) {
+      toast.error(parsed.error.issues[0]!.message);
+      return;
+    }
     setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({ email: parsed.data.email, password });
     setLoading(false);
-    if (error) return toast.error("Não foi possível entrar: " + error.message);
+    if (error) {
+      toast.error("Não foi possível entrar: " + error.message);
+      return;
+    }
     navigate({ to: "/dashboard" });
   }
 
@@ -54,7 +60,10 @@ function AuthPage() {
     const parsed = z
       .object({ email: emailSchema, password: passwordSchema, fullName: z.string().trim().min(3, "Informe o nome completo").max(120) })
       .safeParse({ email, password, fullName });
-    if (!parsed.success) return toast.error(parsed.error.issues[0]!.message);
+    if (!parsed.success) {
+      toast.error(parsed.error.issues[0]!.message);
+      return;
+    }
     setLoading(true);
     const { data, error } = await supabase.auth.signUp({
       email: parsed.data.email,
@@ -65,20 +74,33 @@ function AuthPage() {
       },
     });
     setLoading(false);
-    if (error) return toast.error("Não foi possível cadastrar: " + error.message);
-    if (data.session) return navigate({ to: "/dashboard" });
+    if (error) {
+      toast.error("Não foi possível cadastrar: " + error.message);
+      return;
+    }
+    if (data.session) {
+      navigate({ to: "/dashboard" });
+      return;
+    }
     toast.success("Cadastro criado. Confirme o e-mail para acessar o sistema.");
   }
 
   async function handleReset() {
     const parsed = emailSchema.safeParse(email);
-    if (!parsed.success) return toast.error("Informe um e-mail válido para recuperar a senha");
+    if (!parsed.success) {
+      toast.error("Informe um e-mail válido para recuperar a senha");
+      return;
+    }
     const { error } = await supabase.auth.resetPasswordForEmail(parsed.data, {
       redirectTo: `${window.location.origin}/reset-password`,
     });
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     toast.success("Enviamos um link de recuperação para o seu e-mail.");
   }
+
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-secondary px-4 py-10">
