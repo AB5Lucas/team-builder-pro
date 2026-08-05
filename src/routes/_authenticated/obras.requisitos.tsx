@@ -156,7 +156,7 @@ function RequirementsPage() {
   });
 
   const update = useMutation({
-    mutationFn: async ({ id, patch }: { id: string; patch: Record<string, boolean> }) => {
+    mutationFn: async ({ id, patch }: { id: string; patch: { mandatory?: boolean; blocking?: boolean; active?: boolean } }) => {
       const { error } = await supabase.from("work_requirements").update(patch).eq("id", id);
       if (error) throw error;
     },
@@ -181,27 +181,29 @@ function RequirementsPage() {
       <PageHeader
         title="Requisitos das Obras"
         description="Treinamentos, certificações e CNH exigidos por obra."
-      >
-        <div className="flex flex-wrap gap-2">
-          <Button variant="outline" size="sm" asChild>
-            <Link to="/obras">
-              <ArrowLeft className="h-4 w-4" /> Obras
-            </Link>
+      
+        actions={
+      <div className="flex flex-wrap gap-2">
+        <Button variant="outline" size="sm" asChild>
+          <Link to="/obras">
+            <ArrowLeft className="h-4 w-4" /> Obras
+          </Link>
+        </Button>
+        {canWrite && (
+          <Button
+            size="sm"
+            disabled={!workId}
+            onClick={() => {
+              setForm(emptyForm);
+              setOpen(true);
+            }}
+          >
+            <Plus className="h-4 w-4" /> Novo requisito
           </Button>
-          {canWrite && (
-            <Button
-              size="sm"
-              disabled={!workId}
-              onClick={() => {
-                setForm(emptyForm);
-                setOpen(true);
-              }}
-            >
-              <Plus className="h-4 w-4" /> Novo requisito
-            </Button>
-          )}
-        </div>
-      </PageHeader>
+        )}
+      </div>
+        }
+      />
 
       <div className="max-w-sm space-y-1">
         <Label>Obra</Label>

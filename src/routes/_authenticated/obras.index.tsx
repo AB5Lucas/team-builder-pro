@@ -273,25 +273,27 @@ function WorksPage() {
 
   return (
     <div className="space-y-4">
-      <PageHeader title="Obras" description="Cadastro de obras, endereços, distâncias e responsáveis.">
-        <div className="flex flex-wrap gap-2">
-          <Button variant="outline" size="sm" asChild>
-            <Link to="/obras/equipes-base">
-              <Users className="h-4 w-4" /> Equipes Base
-            </Link>
+      <PageHeader title="Obras" description="Cadastro de obras, endereços, distâncias e responsáveis."
+        actions={
+      <div className="flex flex-wrap gap-2">
+        <Button variant="outline" size="sm" asChild>
+          <Link to="/obras/equipes-base">
+            <Users className="h-4 w-4" /> Equipes Base
+          </Link>
+        </Button>
+        <Button variant="outline" size="sm" asChild>
+          <Link to="/obras/requisitos">
+            <ClipboardList className="h-4 w-4" /> Requisitos
+          </Link>
+        </Button>
+        {canWrite && (
+          <Button size="sm" onClick={openNew}>
+            <Plus className="h-4 w-4" /> Nova obra
           </Button>
-          <Button variant="outline" size="sm" asChild>
-            <Link to="/obras/requisitos">
-              <ClipboardList className="h-4 w-4" /> Requisitos
-            </Link>
-          </Button>
-          {canWrite && (
-            <Button size="sm" onClick={openNew}>
-              <Plus className="h-4 w-4" /> Nova obra
-            </Button>
-          )}
-        </div>
-      </PageHeader>
+        )}
+      </div>
+        }
+      />
 
       <div className="flex flex-wrap items-center gap-2">
         <div className="relative min-w-52 flex-1">

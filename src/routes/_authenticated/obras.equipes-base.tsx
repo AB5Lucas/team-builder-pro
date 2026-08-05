@@ -175,27 +175,29 @@ function BaseTeamsPage() {
       <PageHeader
         title="Equipes Base"
         description="Equipe padrão de cada obra, independente da programação diária."
-      >
-        <div className="flex flex-wrap gap-2">
-          <Button variant="outline" size="sm" asChild>
-            <Link to="/obras">
-              <ArrowLeft className="h-4 w-4" /> Obras
-            </Link>
+      
+        actions={
+      <div className="flex flex-wrap gap-2">
+        <Button variant="outline" size="sm" asChild>
+          <Link to="/obras">
+            <ArrowLeft className="h-4 w-4" /> Obras
+          </Link>
+        </Button>
+        {canWrite && (
+          <Button
+            size="sm"
+            disabled={!workId}
+            onClick={() => {
+              setForm(emptyForm);
+              setOpen(true);
+            }}
+          >
+            <Plus className="h-4 w-4" /> Adicionar colaborador
           </Button>
-          {canWrite && (
-            <Button
-              size="sm"
-              disabled={!workId}
-              onClick={() => {
-                setForm(emptyForm);
-                setOpen(true);
-              }}
-            >
-              <Plus className="h-4 w-4" /> Adicionar colaborador
-            </Button>
-          )}
-        </div>
-      </PageHeader>
+        )}
+      </div>
+        }
+      />
 
       <div className="max-w-sm space-y-1">
         <Label>Obra</Label>
