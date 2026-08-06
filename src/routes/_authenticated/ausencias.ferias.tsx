@@ -1,23 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PageHeader, ComingSoon } from "@/components/page-header";
+import { AbsenceManager } from "@/components/absence-manager";
 
 export const Route = createFileRoute("/_authenticated/ausencias/ferias")({
   head: () => ({
     meta: [
       { title: "Férias | Programação Operacional" },
-      { name: "description", content: "Períodos de férias que bloqueiam a programação." },
+      { name: "description", content: "Períodos de férias programados e em curso por colaborador." },
       { property: "og:title", content: "Férias | Programação Operacional" },
-      { property: "og:description", content: "Períodos de férias que bloqueiam a programação." },
+      { property: "og:description", content: "Períodos de férias programados e em curso por colaborador." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
-  component: Page,
+  component: () => (
+    <AbsenceManager
+      table="vacations"
+      mode="period"
+      title="Férias"
+      description="Períodos de férias programados e em curso por colaborador."
+      addLabel="Lançar férias"
+    />
+  ),
 });
-
-function Page() {
-  return (
-    <div className="space-y-2">
-      <PageHeader title="Férias" description="Períodos de férias que bloqueiam a programação." />
-      <ComingSoon phase="Fase 4" />
-    </div>
-  );
-}
