@@ -291,7 +291,7 @@ export function DailyScheduleBoard({
   });
 
   const updateRow = useMutation({
-    mutationFn: async ({ id, patch }: { id: string; patch: Record<string, unknown> }) => {
+    mutationFn: async ({ id, patch }: { id: string; patch: AllocationPatch }) => {
       const { error } = await supabase.from("daily_allocations").update(patch).eq("id", id);
       if (error) throw error;
     },
