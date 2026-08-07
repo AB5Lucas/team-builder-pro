@@ -40,6 +40,13 @@ import {
 
 const NONE = "__none__";
 
+type AllocationPatch = {
+  confirmation_status: "confirmed" | "pending";
+  confirmed_by: string | null;
+  confirmed_at: string | null;
+};
+
+
 const STATUS_LABEL: Record<string, string> = {
   draft: "Rascunho",
   in_progress: "Em andamento",
