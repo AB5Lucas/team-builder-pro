@@ -183,16 +183,16 @@ function TransportPage() {
     setOpen(true);
   }
 
-  function openEdit(t: { id: string } & Record<string, unknown>) {
+  function openEdit(t: Tables<"transport_allocations">) {
     setEditingId(t.id);
     setForm({
-      work_id: String(t.work_id ?? ""),
-      vehicle_id: (t.vehicle_id as string) ?? NONE,
-      driver_id: (t.driver_id as string) ?? NONE,
-      departure_time: ((t.departure_time as string) ?? "").slice(0, 5),
-      return_time: ((t.return_time as string) ?? "").slice(0, 5),
+      work_id: t.work_id,
+      vehicle_id: t.vehicle_id ?? NONE,
+      driver_id: t.driver_id ?? NONE,
+      departure_time: (t.departure_time ?? "").slice(0, 5),
+      return_time: (t.return_time ?? "").slice(0, 5),
       passenger_count: String(t.passenger_count ?? 0),
-      notes: (t.notes as string) ?? "",
+      notes: t.notes ?? "",
     });
     setOpen(true);
   }
