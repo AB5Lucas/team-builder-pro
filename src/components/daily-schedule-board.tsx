@@ -41,9 +41,10 @@ import {
 const NONE = "__none__";
 
 type AllocationPatch = {
-  confirmation_status: "confirmed" | "pending";
-  confirmed_by: string | null;
-  confirmed_at: string | null;
+  confirmation_status?: "confirmed" | "pending";
+  confirmed_by?: string | null;
+  confirmed_at?: string | null;
+  overnight?: boolean;
 };
 
 
