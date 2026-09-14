@@ -487,6 +487,15 @@ export function DailyScheduleBoard({
                       </p>
                     </div>
                     <Button
+                      variant={r.overnight ? "secondary" : "ghost"}
+                      size="sm"
+                      disabled={!editable}
+                      title="Pernoite (dorme fora)"
+                      onClick={() => updateRow.mutate({ id: r.id, patch: { overnight: !r.overnight } })}
+                    >
+                      {r.overnight ? "Pernoite ✓" : "Pernoite"}
+                    </Button>
+                    <Button
                       variant={r.confirmation_status === "confirmed" ? "default" : "outline"}
                       size="sm"
                       disabled={!editable}
