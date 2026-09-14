@@ -139,12 +139,12 @@ function BonusPage() {
 
   const activeRules = useMemo(() => (rules.data ?? []).filter((r) => r.active), [rules.data]);
 
-  const ruleFor = (distance: number) =>
-    activeRules.find((r) => {
+  const rulesFor = (distance: number) =>
+    activeRules.filter((r) => {
       const min = Number(r.minimum_distance);
       const max = r.maximum_distance === null ? Infinity : Number(r.maximum_distance);
       return distance >= min && distance <= max;
-    }) ?? null;
+    });
 
   const allocations = useQuery({
     queryKey: ["tb-allocations", month],
