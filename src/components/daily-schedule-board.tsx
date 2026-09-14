@@ -41,9 +41,10 @@ import {
 const NONE = "__none__";
 
 type AllocationPatch = {
-  confirmation_status: "confirmed" | "pending";
-  confirmed_by: string | null;
-  confirmed_at: string | null;
+  confirmation_status?: "confirmed" | "pending";
+  confirmed_by?: string | null;
+  confirmed_at?: string | null;
+  overnight?: boolean;
 };
 
 
@@ -485,6 +486,15 @@ export function DailyScheduleBoard({
                           .join(" · ") || "—"}
                       </p>
                     </div>
+                    <Button
+                      variant={r.overnight ? "secondary" : "ghost"}
+                      size="sm"
+                      disabled={!editable}
+                      title="Pernoite (dorme fora)"
+                      onClick={() => updateRow.mutate({ id: r.id, patch: { overnight: !r.overnight } })}
+                    >
+                      {r.overnight ? "Pernoite ✓" : "Pernoite"}
+                    </Button>
                     <Button
                       variant={r.confirmation_status === "confirmed" ? "default" : "outline"}
                       size="sm"

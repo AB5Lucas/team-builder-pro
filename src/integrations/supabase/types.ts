@@ -207,6 +207,7 @@ export type Database = {
           has_pending_requirement: boolean
           id: string
           notes: string | null
+          overnight: boolean
           position_id: string | null
           schedule_id: string
           sort_order: number
@@ -225,6 +226,7 @@ export type Database = {
           has_pending_requirement?: boolean
           id?: string
           notes?: string | null
+          overnight?: boolean
           position_id?: string | null
           schedule_id: string
           sort_order?: number
@@ -243,6 +245,7 @@ export type Database = {
           has_pending_requirement?: boolean
           id?: string
           notes?: string | null
+          overnight?: boolean
           position_id?: string | null
           schedule_id?: string
           sort_order?: number
@@ -611,6 +614,8 @@ export type Database = {
           calculation_type: string
           created_at: string
           id: string
+          maximum_distance: number | null
+          minimum_distance: number
           name: string
         }
         Insert: {
@@ -621,6 +626,8 @@ export type Database = {
           calculation_type?: string
           created_at?: string
           id?: string
+          maximum_distance?: number | null
+          minimum_distance?: number
           name: string
         }
         Update: {
@@ -631,6 +638,8 @@ export type Database = {
           calculation_type?: string
           created_at?: string
           id?: string
+          maximum_distance?: number | null
+          minimum_distance?: number
           name?: string
         }
         Relationships: []
@@ -1021,7 +1030,7 @@ export type Database = {
     Enums: {
       allocation_source: "base_team" | "copied_previous_day" | "manual"
       app_role: "admin" | "programmer" | "viewer"
-      bonus_calculation_type: "daily" | "trip" | "round_trip"
+      bonus_calculation_type: "daily" | "trip" | "round_trip" | "overnight"
       collaborator_status: "active" | "inactive"
       confirmation_status: "confirmed" | "pending"
       requirement_type:
@@ -1164,7 +1173,7 @@ export const Constants = {
     Enums: {
       allocation_source: ["base_team", "copied_previous_day", "manual"],
       app_role: ["admin", "programmer", "viewer"],
-      bonus_calculation_type: ["daily", "trip", "round_trip"],
+      bonus_calculation_type: ["daily", "trip", "round_trip", "overnight"],
       collaborator_status: ["active", "inactive"],
       confirmation_status: ["confirmed", "pending"],
       requirement_type: [
