@@ -47,6 +47,7 @@ const CALC_LABEL: Record<CalcType, string> = {
   daily: "Por dia programado",
   trip: "Por viagem (ida)",
   round_trip: "Por ida e volta (2x)",
+  overnight: "Por pernoite (dorme fora)",
 };
 
 const money = (v: number) => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
