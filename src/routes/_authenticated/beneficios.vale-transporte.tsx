@@ -147,7 +147,7 @@ function VoucherPage() {
         .lt("schedule_date", end);
       if (se) throw se;
       const ids = (schedules ?? []).map((s) => s.id);
-      if (ids.length === 0) return [] as { name: string; days: number; driver: boolean }[];
+      if (ids.length === 0) return [] as { name: string; reg: string; days: number; driver: boolean }[];
 
       const { data: allocations, error: ae } = await supabase
         .from("daily_allocations")
